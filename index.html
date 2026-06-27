@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Depot Survey – Get a $750 Gift Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --hd-orange: #F96302;
+    --hd-orange-dark: #D94F00;
+    --hd-orange-light: #FFF3EB;
+    --hd-orange-glow: rgba(249,99,2,0.18);
+    --text-dark: #1A1A1A;
+    --text-mid: #444;
+    --text-muted: #888;
+    --border: #E8E8E8;
+    --white: #FFFFFF;
+    --bg: #F7F7F7;
+    --success: #27AE60;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow-card: 0 2px 16px rgba(0,0,0,0.09);
+    --shadow-btn: 0 4px 18px rgba(249,99,2,0.38);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--hd-orange);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .header-logo {
+    width: 36px;
+    height: 36px;
+    background: var(--white);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .header-logo svg { width: 26px; height: 26px; }
+  .header-title {
+    color: var(--white);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+  }
+  .header-title span {
+    font-weight: 400;
+    opacity: 0.85;
+    font-size: 14px;
+  }
+  .header-badge {
+    background: rgba(255,255,255,0.22);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.35);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, #fff 0%, #FFF6F0 100%);
+    padding: 28px 20px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Gift card visual */
+  .gift-card-wrap {
+    perspective: 800px;
+    margin-bottom: 22px;
+  }
+  .gift-card {
+    background: linear-gradient(135deg, #F96302 0%, #E05500 60%, #C44400 100%);
+    border-radius: 18px;
+    padding: 22px 24px 20px;
+    max-width: 320px;
+    margin: 0 auto;
+    box-shadow: 0 12px 40px rgba(249,99,2,0.35), 0 2px 8px rgba(0,0,0,0.12);
+    position: relative;
+    overflow: hidden;
+    transform: perspective(700px) rotateX(3deg);
+    transition: transform 0.3s ease;
+  }
+  .gift-card:hover { transform: perspective(700px) rotateX(0deg) scale(1.02); }
+  .gift-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .gift-card::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: -20px;
+    width: 80px; height: 80px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .gc-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+  .gc-label {
+    color: rgba(255,255,255,0.75);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .gc-amount {
+    color: var(--white);
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .gc-amount sup { font-size: 18px; font-weight: 700; vertical-align: super; }
+  .gc-logo-box {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .gc-logo-inner {
+    background: var(--hd-orange);
+    width: 34px; height: 34px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gc-logo-inner svg { width: 24px; height: 24px; }
+  .gc-logo-text {
+    text-align: left;
+    line-height: 1.15;
+  }
+  .gc-logo-text .t1 { font-size: 9px; font-weight: 600; color: #333; letter-spacing: 0.5px; }
+  .gc-logo-text .t2 { font-size: 13px; font-weight: 800; color: var(--hd-orange); }
+  .gc-logo-text .t3 { font-size: 9px; font-weight: 600; color: #333; letter-spacing: 0.5px; }
+  .gc-bottom { color: rgba(255,255,255,0.55); font-size: 10px; letter-spacing: 0.5px; text-align: left; }
+
+  .hero-heading {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.5px;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+  }
+  .hero-heading .highlight { color: var(--hd-orange); }
+  .hero-sub {
+    font-size: 14.5px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 22px;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* CTA button */
+  .btn-cta {
+    display: block;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto 12px;
+    background: linear-gradient(135deg, #F96302 0%, #E05000 100%);
+    color: var(--white);
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 17px 24px;
+    border-radius: 50px;
+    box-shadow: var(--shadow-btn);
+    letter-spacing: 0.2px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .btn-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .btn-cta:active { transform: scale(0.97); box-shadow: 0 2px 10px rgba(249,99,2,0.3); }
+  .btn-cta .arrow { display: inline-block; margin-left: 8px; transition: transform 0.2s; }
+  .btn-cta:hover .arrow { transform: translateX(4px); }
+  .btn-cta-note {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+  }
+  .btn-cta-note a { color: var(--hd-orange); text-decoration: none; }
+
+  /* Urgency bar */
+  .urgency-bar {
+    background: #FFF8F0;
+    border: 1.5px solid #FFD9BB;
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0 0;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .urgency-bar .flame { font-size: 18px; }
+  .urgency-bar p {
+    font-size: 12.5px;
+    color: #C44400;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .urgency-bar p span { font-weight: 400; color: #A05000; }
+
+  /* ── STEPS ── */
+  .steps-section {
+    background: var(--white);
+    padding: 30px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-eyebrow {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--hd-orange);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    margin-bottom: 22px;
+    color: var(--text-dark);
+  }
+
+  .steps-list { display: flex; flex-direction: column; gap: 14px; }
+  .step-card {
+    background: var(--bg);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border: 1.5px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .step-card:hover {
+    border-color: #FFD0AF;
+    box-shadow: 0 2px 12px rgba(249,99,2,0.1);
+  }
+  .step-icon-wrap {
+    background: var(--hd-orange-light);
+    border-radius: 12px;
+    width: 46px; height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 20px;
+  }
+  .step-num {
+    background: var(--hd-orange);
+    color: var(--white);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-content { flex: 1; }
+  .step-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; color: var(--text-dark); }
+  .step-desc { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+
+  /* connector line between steps */
+  .step-connector {
+    width: 2px;
+    height: 14px;
+    background: linear-gradient(to bottom, #FFD0AF, transparent);
+    margin-left: 42px;
+    border-radius: 2px;
+  }
+
+  /* ── STATS ── */
+  .stats-section {
+    background: linear-gradient(135deg, var(--hd-orange) 0%, #E05000 100%);
+    padding: 26px 20px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  .stat-item { flex: 1; }
+  .stat-num {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.8); font-weight: 500; margin-top: 2px; }
+  .stat-divider { width: 1px; background: rgba(255,255,255,0.25); }
+
+  /* ── SECONDARY CTA ── */
+  .mid-cta {
+    background: var(--white);
+    padding: 28px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .mid-cta-label { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+
+  /* ── COMMUNITY ── */
+  .community-section {
+    background: var(--white);
+    padding: 28px 20px 32px;
+  }
+  .community-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .community-title { font-size: 18px; font-weight: 800; }
+  .community-meta { font-size: 12.5px; color: var(--text-muted); }
+  .community-meta strong { color: var(--text-dark); }
+
+  .comments-list { display: flex; flex-direction: column; gap: 0; }
+  .comment {
+    padding: 16px 0;
+    border-bottom: 1px solid #F0F0F0;
+  }
+  .comment:last-child { border-bottom: none; }
+  .comment-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .comment-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+  }
+  .comment-info { flex: 1; }
+  .comment-name { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+  .comment-role { font-size: 11px; color: var(--text-muted); }
+  .comment-verified {
+    font-size: 10.5px;
+    color: var(--success);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .comment-body { font-size: 13.5px; color: var(--text-mid); line-height: 1.6; margin-bottom: 10px; }
+  .comment-footer { display: flex; align-items: center; gap: 14px; }
+  .comment-time { font-size: 11.5px; color: var(--text-muted); }
+  .comment-action {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: #F4F4F4;
+  }
+  .comment-likes {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* brand reply */
+  .comment-brand-reply {
+    background: #FFF6F0;
+    border-left: 3px solid var(--hd-orange);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 10px 14px;
+    margin-top: 10px;
+  }
+  .brand-reply-header { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+  .brand-avatar {
+    width: 28px; height: 28px;
+    background: var(--hd-orange);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .brand-reply-name { font-size: 12.5px; font-weight: 700; color: var(--hd-orange); }
+  .brand-reply-time { font-size: 11px; color: var(--text-muted); margin-left: auto; }
+  .brand-reply-body { font-size: 13px; color: #7A3000; line-height: 1.5; }
+
+  /* ── BOTTOM CTA ── */
+  .bottom-cta {
+    background: linear-gradient(160deg, #FFF6F0 0%, #fff 100%);
+    padding: 32px 20px 36px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .bottom-cta h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 8px; }
+  .bottom-cta h3 span { color: var(--hd-orange); }
+  .bottom-cta p { font-size: 14px; color: var(--text-mid); margin-bottom: 22px; line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #1A1A1A;
+    padding: 16px 20px;
+    text-align: center;
+  }
+  footer p { font-size: 11.5px; color: #888; line-height: 1.7; }
+  footer a { color: #aaa; text-decoration: underline; }
+
+  /* ── PULSE ANIMATION ── */
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(249,99,2,0.45); }
+    70% { box-shadow: 0 0 0 12px rgba(249,99,2,0); }
+    100% { box-shadow: 0 0 0 0 rgba(249,99,2,0); }
+  }
+  .btn-pulse { animation: pulse-ring 2s ease-out infinite; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeUp 0.5s ease forwards; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-pulse { animation: none; }
+    .fade-in { animation: none; }
+    .gift-card { transform: none; }
+  }
+
+  /* ─── ensure tap targets are big enough ─── */
+  @media (max-width: 400px) {
+    .hero-heading { font-size: 24px; }
+    .gift-card { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-brand">
+    <div class="header-logo">
+      <!-- Home Depot icon -->
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="36" height="36" fill="#F96302" rx="6"/>
+        <path d="M6 28V14l12-6 12 6v14H6z" fill="white"/>
+        <rect x="14" y="20" width="8" height="8" fill="#F96302"/>
+      </svg>
+    </div>
+    <div>
+      <div class="header-title">Home Depot <span>Survey</span></div>
+    </div>
+  </div>
+  <div class="header-badge">Official</div>
+</header>
+
+<!-- HERO -->
+<section class="hero fade-in">
+
+  <!-- Gift card -->
+  <div class="gift-card-wrap">
+    <div class="gift-card">
+      <div class="gc-top">
+        <div>
+          <div class="gc-label">Gift Card</div>
+          <div class="gc-amount"><sup>$</sup>750</div>
+        </div>
+        <div class="gc-logo-box">
+          <div class="gc-logo-inner">
+            <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 20V10l9-4 9 4v10H3z"/>
+              <rect x="9" y="14" width="6" height="6" fill="#F96302"/>
+            </svg>
+          </div>
+          <div class="gc-logo-text">
+            <div class="t1">THE</div>
+            <div class="t2">HOME</div>
+            <div class="t3">DEPOT</div>
+          </div>
+        </div>
+      </div>
+      <div class="gc-bottom">Official Reward · Valid In-Store & Online</div>
+    </div>
+  </div>
+
+  <h1 class="hero-heading">Get a <span class="highlight">$750 Home Depot</span> Gift Card</h1>
+  <p class="hero-sub">Take our quick survey about your shopping experience at Home Depot and receive a $750 gift card as a thank you for your feedback.</p>
+
+  <a href="https://giftclick.org/aff_c?offer_id=2442&aff_id=3471" class="btn-cta btn-pulse" target="_blank" rel="noopener">
+    Start Survey Now <span class="arrow">→</span>
+  </a>
+  <p class="btn-cta-note">Takes less than 2 minutes &nbsp;·&nbsp; Free to join</p>
+
+  <div class="urgency-bar">
+    <span class="flame">🔥</span>
+    <p>187 people claimed a gift card today <span>— limited spots remaining</span></p>
+  </div>
+
+</section>
+
+<!-- STEPS -->
+<section class="steps-section">
+  <div class="section-eyebrow">How It Works</div>
+  <h2 class="section-title">Simple 3-Step Process</h2>
+
+  <div class="steps-list">
+
+    <div class="step-card">
+      <div class="step-icon-wrap">📋</div>
+      <div class="step-num" style="display:none">1</div>
+      <div class="step-content">
+        <div class="step-title">Take the Survey</div>
+        <div class="step-desc">Answer a few quick questions about your Home Depot shopping experience.</div>
+      </div>
+    </div>
+
+    <div class="step-connector"></div>
+
+    <div class="step-card">
+      <div class="step-icon-wrap">🎯</div>
+      <div class="step-content">
+        <div class="step-title">Complete 4–6 Simple Deals</div>
+        <div class="step-desc">Includes free trials, app downloads, and Home Depot shopping surveys. You choose what works for you.</div>
+      </div>
+    </div>
+
+    <div class="step-connector"></div>
+
+    <div class="step-card">
+      <div class="step-icon-wrap">🎁</div>
+      <div class="step-content">
+        <div class="step-title">Get Rewarded</div>
+        <div class="step-desc">Receive your $750 Home Depot gift card after completing the survey. Delivered by email within 24–48 hrs.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stat-item">
+    <div class="stat-num">24K+</div>
+    <div class="stat-label">Rewards Claimed</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <div class="stat-num">4.8★</div>
+    <div class="stat-label">Avg. Rating</div>
+  </div>
+  <div class="stat-divider"></div>
+  <div class="stat-item">
+    <div class="stat-num">48 hrs</div>
+    <div class="stat-label">Delivery Time</div>
+  </div>
+</div>
+
+<!-- MID CTA -->
+<div class="mid-cta">
+  <div class="mid-cta-label">Still on the fence? Thousands already claimed theirs.</div>
+  <a href="https://giftclick.org/aff_c?offer_id=2442&aff_id=3471" class="btn-cta" target="_blank" rel="noopener" style="max-width:340px">
+    Claim My $750 Gift Card <span class="arrow">→</span>
+  </a>
+</div>
+
+<!-- COMMUNITY FEEDBACK -->
+<section class="community-section">
+  <div class="community-header">
+    <div class="community-title">Community Feedback</div>
+    <div class="community-meta"><strong>44</strong> comments</div>
+  </div>
+
+  <div class="comments-list">
+
+    <!-- Comment 1 -->
+    <div class="comment">
+      <div class="comment-header">
+        <div class="comment-avatar" style="background:#E8A87C; color:#7A3000;">T</div>
+        <div class="comment-info">
+          <div class="comment-name">Tanya Willows</div>
+          <div class="comment-verified">✔ Verified Participant</div>
+        </div>
+      </div>
+      <div class="comment-body">Stocked up on lumber and paint for the whole reno week! Never thought it'd be this simple to claim. Absolutely worth it 🔨</div>
+      <div class="comment-footer">
+        <span class="comment-time">1 week ago</span>
+        <span class="comment-action">Like</span>
+        <span class="comment-action">Reply</span>
+        <span class="comment-likes">👍 124</span>
+      </div>
+    </div>
+
+    <!-- Comment 2 -->
+    <div class="comment">
+      <div class="comment-header">
+        <div class="comment-avatar" style="background:#6B8CBA; color:#fff;">D</div>
+        <div class="comment-info">
+          <div class="comment-name">Derek Nolan</div>
+          <div class="comment-verified">✔ Verified Participant</div>
+        </div>
+      </div>
+      <div class="comment-body">Just submitted mine! Can't wait to start saving on every Home Depot trip 🏠</div>
+      <div class="comment-footer">
+        <span class="comment-time">1 week ago</span>
+        <span class="comment-action">Like</span>
+        <span class="comment-action">Reply</span>
+        <span class="comment-likes">👍 42</span>
+      </div>
+      <!-- Brand reply -->
+      <div class="comment-brand-reply">
+        <div class="brand-reply-header">
+          <div class="brand-avatar">H</div>
+          <div class="brand-reply-name">Home Depot Survey Team</div>
+          <div class="brand-reply-time">Just now</div>
+        </div>
+        <div class="brand-reply-body">Awesome, Derek! Your gift card email should arrive within 24–48 hours. 🎉</div>
+      </div>
+    </div>
+
+    <!-- Comment 3 -->
+    <div class="comment">
+      <div class="comment-header">
+        <div class="comment-avatar" style="background:#9B6BBD; color:#fff;">N</div>
+        <div class="comment-info">
+          <div class="comment-name">Nina Castillo</div>
+          <div class="comment-verified">✔ Verified Participant</div>
+        </div>
+      </div>
+      <div class="comment-body">Genuinely the quickest survey I've ever done. Already recommended it to my contractor!</div>
+      <div class="comment-footer">
+        <span class="comment-time">1 week ago</span>
+        <span class="comment-action">Like</span>
+        <span class="comment-action">Reply</span>
+        <span class="comment-likes">👍 15</span>
+      </div>
+    </div>
+
+    <!-- Comment 4 (bonus) -->
+    <div class="comment">
+      <div class="comment-header">
+        <div class="comment-avatar" style="background:#5BA87A; color:#fff;">M</div>
+        <div class="comment-info">
+          <div class="comment-name">Marcus J.</div>
+          <div class="comment-verified">✔ Verified Participant</div>
+        </div>
+      </div>
+      <div class="comment-body">Didn't think it was legit at first but the gift card came through no problem. My wife was surprised 😂 Definitely doing it again next season.</div>
+      <div class="comment-footer">
+        <span class="comment-time">3 days ago</span>
+        <span class="comment-action">Like</span>
+        <span class="comment-action">Reply</span>
+        <span class="comment-likes">👍 88</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<div class="bottom-cta">
+  <h3>Ready for Your <span>$750 Gift Card?</span></h3>
+  <p>Join thousands of shoppers who've already claimed their reward. Takes less than 2 minutes.</p>
+  <a href="https://giftclick.org/aff_c?offer_id=2442&aff_id=3471" class="btn-cta btn-pulse" target="_blank" rel="noopener">
+    Start Survey Now <span class="arrow">→</span>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Home Depot Survey. All rights reserved.<br>
+  This is a promotional survey. <a href="#">Terms & Conditions</a> · <a href="#">Privacy Policy</a><br>
+  Gift card reward subject to offer completion requirements.</p>
+</footer>
+
+</body>
+</html>
